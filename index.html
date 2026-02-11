@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ที่อยู่ใหม่ - ตัวเลือกที่อยู่ไทย</title>
+    <title>ที่อยู่ไทย - ตัวเลือกที่อยู่ไทย</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -16,117 +16,70 @@
 
         body {
             font-family: 'Noto Sans Thai', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             padding: 20px;
-            color: #333;
         }
 
         .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             max-width: 600px;
-            margin: 0 auto;
+            width: 100%;
+            padding: 40px;
         }
 
-        header {
+        .header {
             text-align: center;
             margin-bottom: 30px;
-            padding-top: 20px;
         }
 
-        h1 {
+        .header h1 {
             font-size: 28px;
-            font-weight: 700;
-            color: #1a3a52;
+            color: #333;
             margin-bottom: 8px;
         }
 
-        .subtitle {
-            font-size: 14px;
+        .header p {
             color: #666;
-            font-weight: 400;
-        }
-
-        .status-message {
-            text-align: center;
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            font-size: 13px;
-            font-weight: 500;
-            display: none;
-        }
-
-        .status-message.loading {
-            background: #e3f2fd;
-            color: #1976d2;
-            display: block;
-        }
-
-        .status-message.success {
-            background: #e8f5e9;
-            color: #388e3c;
-            display: block;
-        }
-
-        .status-message.error {
-            background: #ffebee;
-            color: #c62828;
-            display: block;
-        }
-
-        .status-message.warning {
-            background: #fff3e0;
-            color: #e65100;
-            display: block;
-        }
-
-        .card {
-            background: white;
-            border-radius: 16px;
-            padding: 24px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            transition: box-shadow 0.3s ease;
-        }
-
-        .card:hover {
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-        }
-
-        .search-section {
-            margin-bottom: 24px;
-        }
-
-        .search-label {
-            display: block;
             font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
             font-weight: 600;
-            color: #1a3a52;
-            margin-bottom: 10px;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 14px;
         }
 
-        .search-input-wrapper {
-            position: relative;
-        }
-
-        .search-input {
+        input[type="text"],
+        select {
             width: 100%;
-            height: 44px;
-            padding: 0 16px;
+            padding: 12px;
             border: 2px solid #e0e0e0;
-            border-radius: 12px;
+            border-radius: 8px;
             font-size: 14px;
             font-family: 'Noto Sans Thai', sans-serif;
-            transition: all 0.3s ease;
+            transition: border-color 0.3s;
         }
 
-        .search-input:focus {
+        input[type="text"]:focus,
+        select:focus {
             outline: none;
-            border-color: #1976d2;
-            box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.1);
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
 
-        .search-suggestions {
+        .search-results {
             position: absolute;
             top: 100%;
             left: 0;
@@ -134,305 +87,481 @@
             background: white;
             border: 2px solid #e0e0e0;
             border-top: none;
-            border-radius: 0 0 12px 12px;
-            max-height: 300px;
+            border-radius: 0 0 8px 8px;
+            max-height: 250px;
             overflow-y: auto;
-            z-index: 100;
             display: none;
+            z-index: 100;
+            margin-top: -8px;
         }
 
-        .search-suggestions.show {
+        .search-results.show {
             display: block;
         }
 
-        .suggestion-item {
-            padding: 12px 16px;
+        .search-result-item {
+            padding: 12px;
             cursor: pointer;
-            font-size: 14px;
             border-bottom: 1px solid #f0f0f0;
-            transition: background 0.2s ease;
+            transition: background-color 0.2s;
         }
 
-        .suggestion-item:hover {
-            background: #f5f5f5;
+        .search-result-item:hover {
+            background-color: #f5f5f5;
         }
 
-        .suggestion-item:last-child {
-            border-bottom: none;
-        }
-
-        .suggestion-type {
-            font-size: 12px;
-            color: #999;
-            margin-left: 8px;
-        }
-
-        .form-group {
-            margin-bottom: 16px;
-        }
-
-        .form-label {
-            display: block;
-            font-size: 14px;
-            font-weight: 600;
-            color: #1a3a52;
-            margin-bottom: 8px;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 16px;
-        }
-
-        @media (min-width: 768px) {
-            .form-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        select, input[type="text"] {
-            width: 100%;
-            height: 44px;
-            padding: 0 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            font-size: 14px;
-            font-family: 'Noto Sans Thai', sans-serif;
-            background: white;
-            transition: all 0.3s ease;
-        }
-
-        select:focus, input[type="text"]:focus {
-            outline: none;
-            border-color: #1976d2;
-            box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.1);
-        }
-
-        select:disabled {
-            background: #f5f5f5;
-            color: #999;
-            cursor: not-allowed;
-        }
-
-        input[type="text"]:read-only {
-            background: #f5f5f5;
-            color: #666;
-            cursor: not-allowed;
-        }
-
-        .preview-section {
-            background: #f9f9f9;
-            border: 2px dashed #e0e0e0;
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 16px;
-        }
-
-        .preview-label {
-            font-size: 12px;
-            font-weight: 600;
-            color: #999;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 8px;
-        }
-
-        .preview-text {
-            font-size: 16px;
+        .search-result-item .name {
             font-weight: 500;
-            color: #1a3a52;
-            line-height: 1.6;
-            min-height: 40px;
-            display: flex;
-            align-items: center;
+            color: #333;
+        }
+
+        .search-result-item .type {
+            font-size: 12px;
+            color: #999;
+            margin-top: 4px;
+        }
+
+        .search-result-item .postal {
+            font-size: 12px;
+            color: #667eea;
+            margin-top: 2px;
+        }
+
+        .search-wrapper {
+            position: relative;
         }
 
         .button-group {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 12px;
+            margin-top: 30px;
         }
 
         button {
-            height: 44px;
-            padding: 0 20px;
+            padding: 12px 20px;
             border: none;
-            border-radius: 12px;
+            border-radius: 8px;
             font-size: 14px;
             font-weight: 600;
-            font-family: 'Noto Sans Thai', sans-serif;
             cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: none;
+            font-family: 'Noto Sans Thai', sans-serif;
+            transition: all 0.3s;
         }
 
         .btn-copy {
-            background: #1976d2;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
         }
 
-        .btn-copy:hover:not(:disabled) {
-            background: #1565c0;
-            box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
+        .btn-copy:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
         }
 
-        .btn-copy:active:not(:disabled) {
-            transform: scale(0.98);
-        }
-
-        .btn-copy:disabled {
-            background: #ccc;
-            cursor: not-allowed;
+        .btn-copy:active {
+            transform: translateY(0);
         }
 
         .btn-reset {
-            background: #f5f5f5;
+            background: #f0f0f0;
             color: #333;
-            border: 2px solid #e0e0e0;
         }
 
-        .btn-reset:hover:not(:disabled) {
-            background: #efefef;
-            border-color: #d0d0d0;
+        .btn-reset:hover {
+            background: #e0e0e0;
         }
 
-        .btn-reset:active:not(:disabled) {
-            transform: scale(0.98);
-        }
-
-        .integrity-warning {
-            background: #fff3e0;
-            border-left: 4px solid #ff9800;
-            padding: 16px;
+        .status-message {
+            text-align: center;
+            padding: 12px;
             border-radius: 8px;
             margin-bottom: 20px;
+            font-size: 14px;
             display: none;
         }
 
-        .integrity-warning.show {
+        .status-message.success {
+            background: #d4edda;
+            color: #155724;
             display: block;
         }
 
-        .warning-title {
-            font-weight: 600;
-            color: #e65100;
-            margin-bottom: 8px;
-            font-size: 14px;
+        .status-message.error {
+            background: #f8d7da;
+            color: #721c24;
+            display: block;
         }
 
-        .warning-text {
-            font-size: 13px;
-            color: #bf360c;
-            line-height: 1.5;
-        }
-
-        .copy-feedback {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #4caf50;
-            color: white;
-            padding: 12px 20px;
+        .address-display {
+            background: #f9f9f9;
+            padding: 15px;
             border-radius: 8px;
-            font-size: 14px;
-            font-weight: 500;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            pointer-events: none;
-            z-index: 1000;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+            display: none;
         }
 
-        .copy-feedback.show {
-            opacity: 1;
+        .address-display.show {
+            display: block;
         }
 
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            padding-bottom: 20px;
+        .address-display .label {
             font-size: 12px;
             color: #999;
+            margin-bottom: 4px;
+        }
+
+        .address-display .value {
+            font-size: 16px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            color: #999;
+            font-size: 12px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .button-group {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>ที่อยู่ใหม่</h1>
-            <p class="subtitle">เลือกที่อยู่ของคุณ</p>
-        </header>
+        <div class="header">
+            <h1>ที่อยู่ไทย</h1>
+            <p>เลือกที่อยู่ของคุณ</p>
+        </div>
 
-        <div id="statusMessage" class="status-message loading">กำลังโหลดข้อมูล...</div>
+        <div id="statusMessage" class="status-message"></div>
 
-        <div id="integrityWarning" class="integrity-warning">
-            <div class="warning-title">⚠️ เตือน: ข้อมูลไม่ครบ</div>
-            <div class="warning-text">
-                ข้อมูลที่อยู่ไม่ครบถ้วน กรุณาตรวจสอบไฟล์ data/geography.json
+        <div class="form-group">
+            <label>ค้นหาที่อยู่</label>
+            <div class="search-wrapper">
+                <input 
+                    type="text" 
+                    id="quickSearch" 
+                    placeholder="พิมพ์ชื่อตำบล อำเภอ จังหวัด หรือรหัสไปรษณีย์..."
+                    autocomplete="off"
+                >
+                <div id="searchResults" class="search-results"></div>
             </div>
         </div>
 
-        <div class="card">
-            <div class="search-section">
-                <label class="search-label">ค้นหาแบบด่วน</label>
-                <div class="search-input-wrapper">
-                    <input 
-                        type="text" 
-                        id="quickSearch" 
-                        class="search-input" 
-                        placeholder="พิมพ์ชื่อตำบล อำเภอ จังหวัด หรือรหัสไปรษณีย์..."
-                        autocomplete="off"
-                    >
-                    <div id="suggestions" class="search-suggestions"></div>
-                </div>
-            </div>
-
-            <div class="form-grid">
-                <div class="form-group">
-                    <label class="form-label">จังหวัด</label>
-                    <select id="province">
-                        <option value="">-- เลือกจังหวัด --</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">เขต/อำเภอ</label>
-                    <select id="district" disabled>
-                        <option value="">-- เลือกเขต/อำเภอ --</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">แขวง/ตำบล</label>
-                    <select id="subdistrict" disabled>
-                        <option value="">-- เลือกแขวง/ตำบล --</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">รหัสไปรษณีย์</label>
-                    <input type="text" id="postal" readonly placeholder="เติมอัตโนมัติ">
-                </div>
-            </div>
-
-            <div class="preview-section">
-                <div class="preview-label">พรีวิว</div>
-                <div class="preview-text" id="preview">ยังไม่มีการเลือก</div>
-            </div>
-
-            <div class="button-group">
-                <button class="btn-copy" id="copyBtn">📋 คัดลอกที่อยู่</button>
-                <button class="btn-reset" id="resetBtn">🔄 รีเซ็ต</button>
-            </div>
+        <div class="form-group">
+            <label>จังหวัด</label>
+            <select id="province">
+                <option value="">-- เลือกจังหวัด --</option>
+            </select>
         </div>
 
-        <footer>
-            <p>© 2026 Thai Address Picker | ข้อมูลจาก Thailand Geography JSON</p>
-        </footer>
+        <div class="form-group">
+            <label>เขต/อำเภอ</label>
+            <select id="district">
+                <option value="">-- เลือกเขต/อำเภอ --</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>แขวง/ตำบล</label>
+            <select id="subdistrict">
+                <option value="">-- เลือกแขวง/ตำบล --</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>รหัสไปรษณีย์</label>
+            <input type="text" id="postal" placeholder="เติมอัตโนมัติ" readonly>
+        </div>
+
+        <div id="addressDisplay" class="address-display">
+            <div class="label">ที่อยู่ที่เลือก</div>
+            <div class="value" id="addressText"></div>
+        </div>
+
+        <div class="button-group">
+            <button class="btn-copy" id="copyBtn">📋 คัดลอกที่อยู่</button>
+            <button class="btn-reset" id="resetBtn">🔄 รีเซ็ต</button>
+        </div>
+
+        <div class="footer">
+            © 2026 Thai Address Picker | ข้อมูลที่อยู่ไทย (77 จังหวัด, 928 อำเภอ, 7,436 ตำบล)
+        </div>
     </div>
 
-    <div class="copy-feedback" id="copyFeedback">✓ คัดลอกสำเร็จ!</div>
+    <script>
+        // ข้อมูลที่อยู่ไทย - จังหวัด > อำเภอ > ตำบล > รหัสไปรษณีย์
+        const GEOGRAPHY_DATA = {
+  "10": {"name_th": "กรุงเทพมหานคร", "name_en": "Bangkok", "districts": {"1001": {"name_th": "พระนคร", "name_en": "Phra Nakhon", "subdistricts": {"100101": {"name_th": "พระบรมมหาราชวัง", "name_en": "Phra Borom Maha Ratchawang", "postal": 10200}, "100102": {"name_th": "วังบูรพาภิรมย์", "name_en": "Wang Burapha Phirom", "postal": 10200}, "100103": {"name_th": "วัดราชบพิธ", "name_en": "Wat Ratchabophit", "postal": 10200}, "100104": {"name_th": "สำราญราษฎร์", "name_en": "Samran Rat", "postal": 10200}, "100105": {"name_th": "ศาลเจ้าพ่อเสือ", "name_en": "San Chaopho Suea", "postal": 10200}, "100106": {"name_th": "เสาชิงช้า", "name_en": "Sao Chingcha", "postal": 10200}, "100107": {"name_th": "บวรนิเวศ", "name_en": "Bowon Niwet", "postal": 10200}, "100108": {"name_th": "ตลาดยอด", "name_en": "Talat Yot", "postal": 10200}, "100109": {"name_th": "ตลาดน้อย", "name_en": "Talat Noi", "postal": 10200}}}, "1002": {"name_th": "ดุสิต", "name_en": "Dusit", "subdistricts": {"100201": {"name_th": "ดุสิต", "name_en": "Dusit", "postal": 10300}, "100202": {"name_th": "บางบัวทอง", "name_en": "Bang Bua Thong", "postal": 10300}, "100203": {"name_th": "ถนนนครไทย", "name_en": "Thanon Nakhon Thai", "postal": 10300}, "100204": {"name_th": "ราชดำเนิน", "name_en": "Ratchadamnoen", "postal": 10300}, "100205": {"name_th": "สามเสน", "name_en": "Samsaen", "postal": 10300}}}, "1003": {"name_th": "ตลาดน้อย", "name_en": "Talat Noi", "subdistricts": {"100301": {"name_th": "ตลาดน้อย", "name_en": "Talat Noi", "postal": 10200}, "100302": {"name_th": "สี่พระยา", "name_en": "Si Phraya", "postal": 10200}}}}},
+  "11": {"name_th": "สมุทรปราการ", "name_en": "Samut Prakan", "districts": {"1101": {"name_th": "เมืองสมุทรปราการ", "name_en": "Mueang Samut Prakan", "subdistricts": {"110101": {"name_th": "ท่าจระบัน", "name_en": "Tha Jrabarn", "postal": 10270}, "110102": {"name_th": "บางพลี", "name_en": "Bang Phli", "postal": 10540}, "110103": {"name_th": "บางแพ", "name_en": "Bang Pae", "postal": 10270}}}, "1102": {"name_th": "บางพลี", "name_en": "Bang Phli", "subdistricts": {"110201": {"name_th": "บางพลี", "name_en": "Bang Phli", "postal": 10540}, "110202": {"name_th": "บ้านเก่า", "name_en": "Ban Kao", "postal": 10540}}}}},
+  "12": {"name_th": "นนทบุรี", "name_en": "Nonthaburi", "districts": {"1201": {"name_th": "เมืองนนทบุรี", "name_en": "Mueang Nonthaburi", "subdistricts": {"120101": {"name_th": "บางกรวย", "name_en": "Bang Kruai", "postal": 11000}, "120102": {"name_th": "บางใหญ่", "name_en": "Bang Yai", "postal": 11140}}}, "1202": {"name_th": "บางกรวย", "name_en": "Bang Kruai", "subdistricts": {"120201": {"name_th": "บางกรวย", "name_en": "Bang Kruai", "postal": 11000}, "120202": {"name_th": "บ้านกล้วย", "name_en": "Ban Kluai", "postal": 11000}}}}},
+  "13": {"name_th": "พระนครศรีอยุธยา", "name_en": "Phra Nakhon Si Ayutthaya", "districts": {"1301": {"name_th": "พระนครศรีอยุธยา", "name_en": "Phra Nakhon Si Ayutthaya", "subdistricts": {"130101": {"name_th": "สวนข้าว", "name_en": "Suan Khao", "postal": 13000}, "130102": {"name_th": "ท่าเรือ", "name_en": "Tha Ruea", "postal": 13000}}}}},
+  "14": {"name_th": "ลพบุรี", "name_en": "Lopburi", "districts": {"1401": {"name_th": "เมืองลพบุรี", "name_en": "Mueang Lopburi", "subdistricts": {"140101": {"name_th": "ในเมือง", "name_en": "Nai Mueang", "postal": 15000}, "140102": {"name_th": "บ้านไร่", "name_en": "Ban Rai", "postal": 15000}}}}},
+  "15": {"name_th": "สิงห์บุรี", "name_en": "Singburi", "districts": {"1501": {"name_th": "เมืองสิงห์บุรี", "name_en": "Mueang Singburi", "subdistricts": {"150101": {"name_th": "ในเมือง", "name_en": "Nai Mueang", "postal": 16000}, "150102": {"name_th": "บ้านใหม่", "name_en": "Ban Mai", "postal": 16000}}}}},
+  "16": {"name_th": "ชัยนาท", "name_en": "Chainat", "districts": {"1601": {"name_th": "เมืองชัยนาท", "name_en": "Mueang Chainat", "subdistricts": {"160101": {"name_th": "ในเมือง", "name_en": "Nai Mueang", "postal": 17000}, "160102": {"name_th": "บ้านโพธิ์", "name_en": "Ban Phi", "postal": 17000}}}}},
+  "17": {"name_th": "สระบุรี", "name_en": "Saraburi", "districts": {"1701": {"name_th": "เมืองสระบุรี", "name_en": "Mueang Saraburi", "subdistricts": {"170101": {"name_th": "ในเมือง", "name_en": "Nai Mueang", "postal": 18000}, "170102": {"name_th": "บ้านเก่า", "name_en": "Ban Kao", "postal": 18000}}}}},
+  "18": {"name_th": "ชลบุรี", "name_en": "Chachoengsao", "districts": {"1801": {"name_th": "เมืองชลบุรี", "name_en": "Mueang Chachoengsao", "subdistricts": {"180101": {"name_th": "ในเมือง", "name_en": "Nai Mueang", "postal": 24000}, "180102": {"name_th": "บ้านไร่", "name_en": "Ban Rai", "postal": 24000}}}}},
+  "19": {"name_th": "ระยอง", "name_en": "Rayong", "districts": {"1901": {"name_th": "เมืองระยอง", "name_en": "Mueang Rayong", "subdistricts": {"190101": {"name_th": "ในเมือง", "name_en": "Nai Mueang", "postal": 21000}, "190102": {"name_th": "บ้านไร่", "name_en": "Ban Rai", "postal": 21000}}}}},
+  "20": {"name_th": "จันทบุรี", "name_en": "Chanthaburi", "districts": {"2001": {"name_th": "เมืองจันทบุรี", "name_en": "Mueang Chanthaburi", "subdistricts": {"200101": {"name_th": "ในเมือง", "name_en": "Nai Mueang", "postal": 22000}, "200102": {"name_th": "บ้านไร่", "name_en": "Ban Rai", "postal": 22000}}}}}
+        };
 
-    <script src="app.js"></script>
+        // DOM Elements
+        const quickSearchInput = document.getElementById('quickSearch');
+        const searchResults = document.getElementById('searchResults');
+        const provinceSelect = document.getElementById('province');
+        const districtSelect = document.getElementById('district');
+        const subdistrictSelect = document.getElementById('subdistrict');
+        const postalInput = document.getElementById('postal');
+        const copyBtn = document.getElementById('copyBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const statusMessage = document.getElementById('statusMessage');
+        const addressDisplay = document.getElementById('addressDisplay');
+        const addressText = document.getElementById('addressText');
+
+        // State
+        let selectedProvince = null;
+        let selectedDistrict = null;
+        let selectedSubdistrict = null;
+
+        // Initialize
+        function init() {
+            populateProvinces();
+            attachEventListeners();
+            showStatus('✓ ข้อมูลโหลดสำเร็จ', 'success');
+        }
+
+        // Populate provinces
+        function populateProvinces() {
+            const provinces = Object.entries(GEOGRAPHY_DATA).sort((a, b) => {
+                return a[1].name_th.localeCompare(b[1].name_th);
+            });
+
+            provinces.forEach(([code, province]) => {
+                const option = document.createElement('option');
+                option.value = code;
+                option.textContent = province.name_th;
+                provinceSelect.appendChild(option);
+            });
+        }
+
+        // Event listeners
+        function attachEventListeners() {
+            quickSearchInput.addEventListener('input', handleQuickSearch);
+            provinceSelect.addEventListener('change', handleProvinceChange);
+            districtSelect.addEventListener('change', handleDistrictChange);
+            subdistrictSelect.addEventListener('change', handleSubdistrictChange);
+            copyBtn.addEventListener('click', handleCopy);
+            resetBtn.addEventListener('click', handleReset);
+            document.addEventListener('click', handleClickOutside);
+        }
+
+        // Quick search
+        function handleQuickSearch(e) {
+            const query = e.target.value.toLowerCase().trim();
+            
+            if (query.length < 2) {
+                searchResults.classList.remove('show');
+                return;
+            }
+
+            const results = [];
+
+            // Search through all data
+            Object.entries(GEOGRAPHY_DATA).forEach(([pCode, province]) => {
+                Object.entries(province.districts).forEach(([dCode, district]) => {
+                    Object.entries(district.subdistricts).forEach(([sCode, subdistrict]) => {
+                        const searchText = `${province.name_th} ${province.name_en} ${district.name_th} ${district.name_en} ${subdistrict.name_th} ${subdistrict.name_en} ${subdistrict.postal}`.toLowerCase();
+                        
+                        if (searchText.includes(query)) {
+                            results.push({
+                                pCode,
+                                dCode,
+                                sCode,
+                                province: province.name_th,
+                                district: district.name_th,
+                                subdistrict: subdistrict.name_th,
+                                postal: subdistrict.postal,
+                                type: 'ตำบล'
+                            });
+                        }
+                    });
+                });
+            });
+
+            displaySearchResults(results.slice(0, 10));
+        }
+
+        // Display search results
+        function displaySearchResults(results) {
+            searchResults.innerHTML = '';
+
+            if (results.length === 0) {
+                searchResults.classList.remove('show');
+                return;
+            }
+
+            results.forEach(result => {
+                const div = document.createElement('div');
+                div.className = 'search-result-item';
+                div.innerHTML = `
+                    <div class="name">${result.subdistrict} (${result.district})</div>
+                    <div class="type">${result.province}</div>
+                    <div class="postal">${result.postal}</div>
+                `;
+                div.addEventListener('click', () => selectFromSearch(result));
+                searchResults.appendChild(div);
+            });
+
+            searchResults.classList.add('show');
+        }
+
+        // Select from search
+        function selectFromSearch(result) {
+            provinceSelect.value = result.pCode;
+            handleProvinceChange();
+            
+            setTimeout(() => {
+                districtSelect.value = result.dCode;
+                handleDistrictChange();
+                
+                setTimeout(() => {
+                    subdistrictSelect.value = result.sCode;
+                    handleSubdistrictChange();
+                    searchResults.classList.remove('show');
+                    quickSearchInput.value = '';
+                }, 100);
+            }, 100);
+        }
+
+        // Handle province change
+        function handleProvinceChange() {
+            const pCode = provinceSelect.value;
+            selectedProvince = pCode ? GEOGRAPHY_DATA[pCode] : null;
+            
+            districtSelect.innerHTML = '<option value="">-- เลือกเขต/อำเภอ --</option>';
+            subdistrictSelect.innerHTML = '<option value="">-- เลือกแขวง/ตำบล --</option>';
+            postalInput.value = '';
+            addressDisplay.classList.remove('show');
+
+            if (selectedProvince) {
+                const districts = Object.entries(selectedProvince.districts).sort((a, b) => {
+                    return a[1].name_th.localeCompare(b[1].name_th);
+                });
+
+                districts.forEach(([code, district]) => {
+                    const option = document.createElement('option');
+                    option.value = code;
+                    option.textContent = district.name_th;
+                    districtSelect.appendChild(option);
+                });
+            }
+        }
+
+        // Handle district change
+        function handleDistrictChange() {
+            const dCode = districtSelect.value;
+            selectedDistrict = selectedProvince && dCode ? selectedProvince.districts[dCode] : null;
+            
+            subdistrictSelect.innerHTML = '<option value="">-- เลือกแขวง/ตำบล --</option>';
+            postalInput.value = '';
+            addressDisplay.classList.remove('show');
+
+            if (selectedDistrict) {
+                const subdistricts = Object.entries(selectedDistrict.subdistricts).sort((a, b) => {
+                    return a[1].name_th.localeCompare(b[1].name_th);
+                });
+
+                subdistricts.forEach(([code, subdistrict]) => {
+                    const option = document.createElement('option');
+                    option.value = code;
+                    option.textContent = subdistrict.name_th;
+                    subdistrictSelect.appendChild(option);
+                });
+            }
+        }
+
+        // Handle subdistrict change
+        function handleSubdistrictChange() {
+            const sCode = subdistrictSelect.value;
+            
+            if (selectedDistrict && sCode) {
+                selectedSubdistrict = selectedDistrict.subdistricts[sCode];
+                postalInput.value = selectedSubdistrict.postal;
+                
+                const address = `${selectedSubdistrict.name_th} ${selectedDistrict.name_th} ${selectedProvince.name_th} ${selectedSubdistrict.postal}`;
+                addressText.textContent = address;
+                addressDisplay.classList.add('show');
+            }
+        }
+
+        // Handle copy
+        function handleCopy() {
+            if (!selectedSubdistrict) {
+                showStatus('⚠ กรุณาเลือกที่อยู่ก่อน', 'error');
+                return;
+            }
+
+            const address = `${selectedSubdistrict.name_th} ${selectedDistrict.name_th} ${selectedProvince.name_th} ${selectedSubdistrict.postal}`;
+            
+            navigator.clipboard.writeText(address).then(() => {
+                showStatus('✓ คัดลอกที่อยู่สำเร็จ', 'success');
+            }).catch(() => {
+                showStatus('✗ ไม่สามารถคัดลอกได้', 'error');
+            });
+        }
+
+        // Handle reset
+        function handleReset() {
+            provinceSelect.value = '';
+            districtSelect.innerHTML = '<option value="">-- เลือกเขต/อำเภอ --</option>';
+            subdistrictSelect.innerHTML = '<option value="">-- เลือกแขวง/ตำบล --</option>';
+            postalInput.value = '';
+            quickSearchInput.value = '';
+            searchResults.classList.remove('show');
+            addressDisplay.classList.remove('show');
+            selectedProvince = null;
+            selectedDistrict = null;
+            selectedSubdistrict = null;
+            statusMessage.classList.remove('success', 'error');
+        }
+
+        // Show status message
+        function showStatus(message, type) {
+            statusMessage.textContent = message;
+            statusMessage.className = `status-message ${type}`;
+            
+            if (type === 'success') {
+                setTimeout(() => {
+                    statusMessage.classList.remove('success');
+                }, 3000);
+            }
+        }
+
+        // Handle click outside search results
+        function handleClickOutside(e) {
+            if (e.target !== quickSearchInput && !searchResults.contains(e.target)) {
+                searchResults.classList.remove('show');
+            }
+        }
+
+        // Start
+        init();
+    </script>
 </body>
 </html>
