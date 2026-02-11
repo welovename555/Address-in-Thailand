@@ -72,9 +72,24 @@ document.addEventListener('DOMContentLoaded', async () => {
  */
 async function loadGeographyData() {
     try {
-        const response = await fetch('/data/geography.json');
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}: ไม่พบไฟล์ data/geography.json`);
+        // Try multiple paths to find the data file
+        let response;
+        const paths = [
+            '/Address-in-Thailand/data/geography.json',  // GitHub Pages
+            '/data/geography.json'                        // Local root
+        ];
+        
+        for (const path of paths) {
+            try {
+                response = await fetch(path);
+                if (response.ok) break;
+            } catch (e) {
+                continue;
+            }
+        }
+        
+        if (!response || !response.ok) {
+            throw new Error(`HTTP ${response?.status || 'unknown'}: ไม่พบไฟล์ data/geography.json`);
         }
         
         const rawData = await response.json();
